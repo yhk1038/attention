@@ -1,0 +1,63 @@
+@import 'bootstrap';
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "lib/datetimepicker";
+
+@import "components/avatar";
+@import "components/navbar";
+@import "components/sidebar";
+@import "components/footer";
+@import "components/page/all";
+@import "resources/all";
+
+body {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+  color: #2f2936;
+  background: #fbfbfc;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+a {
+  color: #3b6ecc;
+  -webkit-transition: color .2s linear;
+  -o-transition: color linear .2s;
+  transition: color .2s linear;
+  cursor: pointer;
+
+  &:hover {
+    color: #2c58a8;
+  }
+
+  &, &:hover {
+    text-decoration: none;
+  }
+}
+
+.team-section {
+  .team-title-bar {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 20px 30px 10px;
+
+    h1 {
+      font-weight: normal;
+      color: rgb(74, 62, 86);
+      font-size: 20px;
+      line-height: 24px;
+      margin: 0;
+    }
+  }
+}
+
+.note-editor {
+  .dropdown-toggle::after {
+    content: none;
+  }
+}

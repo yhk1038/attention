@@ -1,0 +1,16 @@
+<%= render 'layouts/components/page/top_nav' %>
+
+<div class="container-fluid container-md mb-3">
+  <%= page_heading "Writing New Notification..." do %>
+    <%= link_to organization_notifications_path(@organization, project_id: @project.id), class: 'btn btn-sm btn-styled' do %>
+      <i class="fas fa-arrow-left mr-1"></i>
+      Back
+    <% end %>
+  <% end %>
+</div>
+
+<div class="container-fluid container-md">
+  <div class="page-padding">
+    <%= render 'form', notification: @notification, url: organization_notifications_path(@organization, project_id: @project.id) %>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<%= setting_top_nav %>
+
+<div class="setting-page-wrapper">
+  <%= setting_subside %>
+
+  <div class="setting-page-content">
+    <%= render 'layouts/components/flash' %>
+
+    <div class="mb-4">
+      <%= page_heading "Project Settings" %>
+    </div>
+
+    <div class="page-padding">
+      <%= form_with model: @project, url: organization_project_setting_path(@organization, @project), local: true do |form| %>
+        <%= setting_list_group_section 'project details', submit: true do %>
+          <!-- project.name -->
+          <%=
+            setting_list_item(
+                title: form.label(:name, class: 'col-form-label'),
+                description: 'A unique ID used to identify this project',
+                content: form.text_field(:name, class: 'form-control', required: true)
+            )
+          %>
+
+          <!-- project.host -->
+          <%=
+            setting_list_item(
+                title: form.label(:host, class: 'col-form-label'),
+                description: 'The host is a domain for verifying that it is the correct source for any request sent to this project.',
+                content: form.text_field(:host, class: 'form-control', required: true)
+            )
+          %>
+        <% end %>
+      <% end %>
+
+      <%= setting_list_group_section 'project administration' do %>
+        <%=
+          setting_list_item(
+              title: 'Remove Project',
+              description: "Remove the #{tag.strong @project.name} project and all related data.\nCareful, this action cannot be undone.",
+              content: link_to('Remove Project', project_path(@project), method: :delete, class: 'btn btn-danger', data: { confirm: 'This action is irreversible. Continue?' })
+          )
+        %>
+      <% end %>
+    </div>
+  </div>
+</div>

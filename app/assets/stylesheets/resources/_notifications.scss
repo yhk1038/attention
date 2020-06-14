@@ -1,0 +1,85 @@
+// Place all the styles related to the notifications controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.notification-list-wrapper {
+  .notification-item {
+    line-height: 1;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+
+    .notification-item-column {
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+    }
+
+    .notification-item-summary {
+      width: 50%;
+    }
+    .notification-item-right {
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      & > div {
+        width: 100px;
+        text-align: center;
+
+        .btn-sm {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .notification-title {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+    .notification-written_at {
+      font-size: 14px;
+      text-transform: capitalize;
+      i {
+        font-size: 10px;
+        position: relative;
+        top: -1px;
+      }
+    }
+    .notification-content {
+      font-size: 14px;
+      margin-bottom: 10px;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .notification-others {
+      font-size: 12px;
+      display: flex;
+      flex-direction: row;
+    }
+
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.75rem;
+      height: 18px;
+      width: 8px;
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      cursor: pointer;
+
+      &.notification-live-did_live {
+        background-color: #6c757d;
+      }
+      &.notification-live-in_live {
+        background-color: lawngreen;
+      }
+      &.notification-live-will_live {
+        background-color: gold;
+      }
+    }
+  }
+}

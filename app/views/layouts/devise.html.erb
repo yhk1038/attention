@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title><%= yield(:title) %> | Attention</title>
+
+  <%= stylesheet_pack_tag 'devise' %>
+  <%= javascript_pack_tag 'devise' %>
+</head>
+<body id="devise-layout">
+
+<div id="flash" class="w-100">
+  <% if notice %>
+    <p class="flash-notice"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="flash-alert"><%= alert %></p>
+  <% end %>
+</div>
+
+<div id="wrapper" class="w-100 d-flex center-center h-100">
+  <div id="content">
+    <%= yield %>
+  </div>
+</div>
+</body>
+</html>

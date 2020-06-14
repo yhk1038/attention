@@ -1,0 +1,61 @@
+<%= setting_top_nav %>
+
+<div class="setting-page-wrapper">
+  <%= setting_subside %>
+
+  <div class="setting-page-content w-100">
+    <%= render 'layouts/components/flash' %>
+
+    <div class="container">
+      <div class="mb-4">
+        <%= page_heading 'Create a new Project' do %>
+          <%= link_to organization_projects_path(@organization), class: 'btn btn-sm btn-styled' do %>
+            <i class="fas fa-arrow-left"></i>
+            Go back
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="page-padding mb-5">
+        <p>프로젝트는 조직내 특정 웹사이트(frontend client)에게로 알림을 전송합니다. <br>
+          Projects send your notifications to a specific application in your organization.</p>
+      </div>
+
+      <div class="page-padding">
+        <%= form_with model: @project, url: organization_projects_path(@organization), local: true do |form| %>
+          <%= form.hidden_field :organization_id %>
+
+          <%= setting_list_group_section 'project details' do %>
+            <!-- project.name -->
+            <%=
+              setting_list_item(
+                  title: form.label(:name, class: 'col-form-label'),
+                  description: 'A unique ID used to identify this project',
+                  content: form.text_field(:name, class: 'form-control', required: true)
+              )
+            %>
+
+            <!-- project.host -->
+            <%=
+              setting_list_item(
+                  title: form.label(:host, class: 'col-form-label'),
+                  description: 'The host is a domain for verifying that it is the correct source for any request sent to this project.',
+                  content: form.text_field(:host, class: 'form-control', required: true)
+              )
+            %>
+          <% end %>
+
+          <p class="m-0 text-right">
+            <%= form.submit class: 'btn btn-primary' %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container text-center d-none">
+  <%= render 'form', project: @project, url: organization_projects_path(@organization) %>
+</div>

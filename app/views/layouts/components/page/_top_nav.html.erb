@@ -1,0 +1,26 @@
+<!-- Page Top Nav -->
+<ul class="page-top_nav nav nav-justified bg-white border-bottom shadow-sm">
+  <li class="nav-item dropdown border-right">
+    <a class="nav-link dropdown-toggle d-flex" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="far fa-folder-open mr-3"></i>
+      <span class="flex-grow-1"><%= @project.name %> <span class="badge badge-light badge-pill"><%= @project.humanized_id %></span></span>
+      <i class="fas fa-chevron-down"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-fit shadow-sm">
+      <% @organization.projects.each do |project| %>
+        <% next if project == @project %>
+        <%= link_to project_path(project), class: 'dropdown-item' do %>
+          <span class="flex-grow-1"><%= project.name %> <span class="badge badge-light badge-pill"><%= project.humanized_id %></span></span>
+          <small class="text-muted"><%= project.host %></small>
+        <% end %>
+      <% end %>
+    </div>
+  </li>
+  <li class="nav-item invisible">
+    <a class="nav-link" href="#">Longer nav link</a>
+  </li>
+  <li class="nav-item invisible">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+</ul>
+<!-- /.page-top_nav -->

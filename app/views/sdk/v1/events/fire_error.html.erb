@@ -1,0 +1,7 @@
+<script type="text/javascript" charset="utf-8">
+  console.warn("Your requested origin - '<%= params[:origin] %>' - isn't recognizable. Please check your project host. (Project: '<%= @project.humanized_id %>')')");
+
+  onReady(function() {
+    didClose('<%= @notification.id %>');
+  });
+</script>

@@ -1,0 +1,59 @@
+<li class="notification-item list-group-item">
+
+  <!-- Avatar -->
+  <div class="notification-item-column mr-3">
+              <span class="avatar-character avatar-character-lg border-0"
+                    title="<%= user.full_name %>"
+                    data-toggle="tooltip"
+                    data-placement="top">
+                <%= user.last_name.first %>
+              </span>
+  </div>
+
+  <!-- Body -->
+  <div class="notification-item-summary notification-item-column mr-auto">
+    <!-- td:1 - row:1 -->
+    <div class="notification-title">
+      <span class="font-weight-bold mr-2"><%= user.full_name %></span>
+      <span class="notification-written_at text-secondary">&middot; <%= l user.created_at, format: :short %></span>
+    </div>
+    <!-- td:1 - row:2 -->
+    <div class="notification-content mb-0 text-muted overflow-auto"><%= user.email %></div>
+    <!-- td:1 - row:3 -->
+    <div class="notification-others">
+
+    </div>
+  </div>
+
+
+  <!-- Right Side -->
+  <div class="notification-item-right">
+
+    <!-- 차트 -->
+    <div class="notification-item-column py-0" style="width: 300px">
+      <div class="text-center w-100"></div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="notification-item-column" style="width: 200px">
+      <span class="d-block"><%= 0 %></span>
+    </div>
+
+    <!-- Comments -->
+    <div class="notification-item-column">
+      <span><%= 0 %></span>
+    </div>
+
+    <!-- Role -->
+    <div class="notification-item-column">
+      <span>Owner</span>
+    </div>
+
+    <!-- Actions -->
+    <div class="notification-item-column" style="width: 200px">
+      <%= link_to '#', class: 'btn btn-sm btn-styled', data: { confirm: 'Now you ready to publish?' } do %>
+        <i class="fas fa-concierge-bell mr-1"></i> Publish
+      <% end %>
+    </div>
+  </div>
+</li>

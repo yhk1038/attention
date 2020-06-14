@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  content: MyText
+  project: one
+  live_start_at: 2020-06-07 01:38:09
+  live_stop_at: 2020-06-07 01:38:09
+
+two:
+  title: MyString
+  content: MyText
+  project: two
+  live_start_at: 2020-06-07 01:38:09
+  live_stop_at: 2020-06-07 01:38:09

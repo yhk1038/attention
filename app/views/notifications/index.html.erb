@@ -1,0 +1,101 @@
+<%= render 'layouts/components/page/top_nav' %>
+<%= render 'layouts/components/flash' %>
+
+<%= page_heading "Notifications (#{@project.notifications_count})" do %>
+  <%= link_to new_organization_notification_path(@organization, project_id: @project.id), class: 'btn btn-sm btn-styled' do %>
+    <i class="fas fa-plus-circle mr-1"></i>
+    Create Notification
+  <% end %>
+<% end %>
+
+<div class="notification-list-wrapper page-padding container-fluid mt-3">
+  <div class="card">
+    <div class="card-header d-flex" style="justify-content: space-between">
+      <div class="w-50 mr-auto"></div>
+      <div class="d-flex align-items-stretch align-items-center">
+        <div class="text-center" style="width: 200px">Live Status</div>
+        <div class="text-center" style="width: 100px">Hits</div>
+        <div class="text-center" style="width: 200px">Actions</div>
+      </div>
+    </div>
+    <ul class="notification-list list-group list-group-flush">
+      <%#
+        notification = @project.notifications.build(
+            title: '첫 번째 공지사항 입니다.',
+            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu placerat magna. Donec sit amet dolor non dolor gravida malesuada. Etiam blandit turpis ac metus congue, sit amet consequat sapien convallis. Nulla aliquam urna in libero consectetur tempor. Maecenas porttitor enim posuere, porttitor dui et, luctus leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec magna turpis, dictum in fringilla vitae, eleifend non turpis. Pellentesque a ornare arcu. Nulla urna odio, accumsan ac feugiat nec, aliquam at nibh. Pellentesque malesuada efficitur eleifend. Proin justo augue, pellentesque a cursus eu, malesuada non massa. Suspendisse pellentesque venenatis nisl in scelerisque. Nunc pellentesque ac ante ac feugiat. In ut sapien convallis, tincidunt libero sed, elementum libero.',
+            live_start_at: 1.days.after,
+            live_stop_at: 8.days.after,
+            created_at: 0.day.after
+        )
+      %>
+      <% @notifications.each do |notification| %>
+        <li class="notification-item list-group-item notification-live-<%= notification.live_status %>">
+          <!-- td:1 -->
+          <div class="notification-item-summary notification-item-column mr-auto">
+            <!-- td:1 - row:1 -->
+            <div class="notification-title">
+              <%= link_to notification.title, organization_notification_path(@organization, notification.id), class: 'mr-2' %>
+              <span class="notification-written_at text-secondary">&middot; <%= l notification.created_at, format: :short %> (First ver)</span>
+            </div>
+            <!-- td:1 - row:2 -->
+            <div class="notification-content"><%= notification.content.to_s %></div>
+            <!-- td:1 - row:3 -->
+            <div class="notification-others">
+              <!-- td:1 - row:3 - td:1 -->
+              <div>
+                <i class="far fa-clock mr-1"></i>
+                <time datetime="<%= notification.live_start_at.as_json %>" title="<%= notification.live_start_at %>"><%= l notification.live_start_at, format: :short %></time>
+                <span>&nbsp;—&nbsp;</span>
+                <time datetime="<%= notification.live_stop_at.as_json %>" title="<%= notification.live_stop_at %>"><%= l notification.live_stop_at, format: :short %></time>
+              </div>
+              <div>
+                <span class="text-secondary ml-2">&middot; <b><%= notification.humanized_id %></b></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="notification-item-right">
+            <div class="notification-item-column py-0" style="width: 300px">
+              <div class="hits-chart text-center w-100" data-data="<%= bar_chart_format('Daily Hits', notification.hits.for_a_week(format: '%a')).to_json %>" data-height="82"></div>
+            </div>
+
+            <div class="notification-item-column" style="width: 200px">
+              <span class="d-block"><%= notification.live_status.to_s.humanize %></span>
+            </div>
+
+            <div class="notification-item-column">
+              <span><%= notification.hits_count %></span>
+            </div>
+
+            <div class="notification-item-column" style="width: 200px">
+              <% if notification.draft? %>
+                <%= link_to organization_notification_path(@organization, notification, notification: { published: true }, redirect_url: request.url), method: :put, class: 'btn btn-sm btn-styled', data: { confirm: 'Now you ready to publish?' } do %>
+                  <i class="fas fa-concierge-bell mr-1"></i> Publish
+                <% end %>
+              <% elsif notification.will_live? %>
+                <%= link_to edit_organization_notification_path(@organization, notification), class: 'btn btn-sm btn-styled' do %>
+                  <i class="fas fa-pen mr-1"></i> Edit
+                <% end %>
+                <%= link_to organization_notification_path(@organization, notification), method: :delete, class: 'btn btn-sm btn-styled', data: { confirm: 'Really?' } do %>
+                  <i class="fas fa-trash mr-1"></i> Remove
+                <% end %>
+              <% elsif notification.in_live? %>
+                <%= link_to edit_organization_notification_path(@organization, notification), class: 'btn btn-sm btn-styled' do %>
+                  <i class="fas fa-stop mr-1"></i> Stop
+                <% end %>
+              <% elsif notification.did_live? %>
+                <%= link_to organization_notification_path(@organization, notification), class: 'btn btn-sm btn-styled' do %>
+                  <i class="far fa-calendar-check mr-1"></i> Show
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.css">
+<script src="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.js"></script>
+

@@ -1,0 +1,36 @@
+<!-- Setting Page Top Nav -->
+<ul class="setting_page-top_nav page-top_nav nav nav-justified bg-white border-bottom shadow-sm">
+  <li class="nav-item dropdown border-right">
+    <a class="nav-link d-flex" href="javascript:void(0)" role="button">
+      <span class="flex-grow-1"><%= @organization.name %> (<%= @organization.full_name %>)</span>
+
+      <% if @project.persisted? %>
+        <span class="flex-grow-1">/</span>
+        <span class="mr-2">Settings for :</span>
+      <% end %>
+    </a>
+  </li>
+
+  <% if @project.persisted? %>
+    <li class="nav-item dropdown border-right">
+      <a class="nav-link dropdown-toggle d-flex" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="far fa-folder-open mr-3"></i>
+        <span class="flex-grow-1"><%= @project.name %> <span class="badge badge-light badge-pill"><%= @project.humanized_id %></span></span>
+        <i class="fas fa-chevron-down"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-fit" aria-labelledby="navbarDropdown">
+        <% @organization.projects.each do |project| %>
+          <% next if project == @project %>
+          <%= link_to root_organization_project_setting_path(@organization, project), class: "dropdown-item #{'active' if project == @project}" do %>
+            <span class="flex-grow-1"><%= project.name %> <span class="badge badge-light badge-pill"><%= project.humanized_id %></span></span>
+            <small class="text-muted"><%= project.host %></small>
+          <% end %>
+        <% end %>
+      </div>
+    </li>
+  <% else %>
+    <li class="nav-item invisible"></li>
+  <% end %>
+  <li class="nav-item invisible"></li>
+</ul>
+<!-- /.page-top_nav -->

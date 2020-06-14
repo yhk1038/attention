@@ -1,0 +1,88 @@
+<%= page_heading 'Projects' do %>
+  <%= link_to new_organization_project_path, class: 'btn btn-sm btn-styled' do %>
+    <i class="fas fa-plus-circle mr-1"></i>
+    Create Project
+  <% end %>
+<% end %>
+
+<div id="chart-area"></div>
+
+<div class="team-section">
+  <div class="team-title-bar mb-4">
+    <h1>
+      <%= link_to "##{@organization.full_name}", organization_path(@organization) %>
+    </h1>
+
+    <div>
+      <% @organization.users.each do |user| %>
+        <span class="avatar-character"
+              title="<%= user.full_name %>"
+              data-toggle="tooltip"
+              data-placement="top">
+          <%= user.last_name.first %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="team-project-cards page-padding container-fluid">
+    <div class="row">
+      <% @projects.each do |project| %>
+        <div class="col-12 col-sm-4 col-md-3 mb-3">
+          <div class="card">
+            <div class="card-header bg-transparent d-flex border-bottom-0">
+              <h3 class="project-name">
+                <%= link_to project.name, project_path(project) %>
+                <small class="d-block text-muted"><%= project.host %></small>
+              </h3>
+              <%= link_to root_organization_project_setting_path(@organization, project), class: 'text-secondary' do %>
+                <i class="fas fa-cog"></i>
+              <% end %>
+            </div>
+            <div class="card-body pt-2">
+              <div class="hits-chart text-center w-100" data-data="<%= bar_chart_format('Daily Hits', project.hits.for_a_week(format: '%a')).to_json %>"></div>
+
+              <hr>
+              <p class="card-label">Notifications</p>
+              <div class="notification-stat-wrapper">
+                <!-- 등록된 노티 갯수 -->
+                <div>
+                  <span class="d-block">total</span>
+                  <span class="d-block"><%= project.notifications_count %></span>
+                </div>
+                <!-- 예정된 노티 갯수 -->
+                <div>
+                  <span class="d-block">scheduled</span>
+                  <span class="d-block"><%= project.scheduled_notifications_count %></span>
+                </div>
+                <!-- 노티 진행중 여부 -->
+                <div>
+                  <span class="d-block">on air</span>
+                  <span class="d-block"><%= project.in_live_notifications_count %></span>
+                </div>
+              </div>
+              <div class="d-flex border-top pt-1">
+                <small class="flex-grow-1">Next on air</small>
+
+                <% notice = project.next_on_air %>
+                <small class="text-muted" title="Title: <%= notice.title if notice %>">
+                  <% if notice.nil? %>
+                    <span>-</span>
+                  <% else %>
+                    <%= link_to notice.humanized_id, organization_notification_path(@organization, notice, project_id: project.id) %>
+                    &middot;
+                    <span><%= notice.live_start_at.strftime('%Y/%m/%d %H:%M') %></span>
+                  <% end %>
+                </small>
+              </div>
+            </div>
+            <div class="card-footer d-flex align-items-center">
+              <small class="text-muted flex-grow-1"><b>Project ID: <%= project.humanized_id %></b></small>
+              <small class="text-muted">Since <%= l project.created_at, format: :short %></small>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

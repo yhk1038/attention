@@ -1,0 +1,19 @@
+<%
+  title = option.dig(:title)
+  description = option.dig(:description)
+  content = option.dig(:content)
+%>
+
+<li class="list-group-item">
+  <div class="form-group row">
+    <div class="col-sm-6">
+      <span><%= title %></span>
+      <% if description %>
+        <small class="text-muted"><%= raw description %></small>
+      <% end %>
+    </div>
+    <div class="col-sm-6">
+      <%= content %>
+    </div>
+  </div>
+</li>

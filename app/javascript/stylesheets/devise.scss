@@ -1,0 +1,48 @@
+@import '~bootstrap';
+
+html, body {
+  height: 100%;
+}
+
+body#devise-layout {
+  #wrapper {
+    background-color: #fbfbfc;
+
+    #content {
+      width: 100%;
+      min-width: 320px;
+      max-width: 576px;
+    }
+  }
+
+  .center-center {
+    @extend .justify-content-center;
+    @extend .align-items-center;
+  }
+
+  .flash {
+    &-notice {
+      @extend .alert;
+      @extend .alert-success;
+      @extend .border-0;
+      @extend .rounded-0;
+      @extend .text-center;
+      @extend .border-bottom;
+    }
+    &-alert {
+      @extend .alert;
+      @extend .alert-danger;
+      @extend .border-0;
+      @extend .rounded-0;
+      @extend .text-center;
+      @extend .border-bottom;
+    }
+  }
+
+  .card-header {
+    background: #564f64;
+    background-image: linear-gradient(-180deg,rgba(52,44,62,0),rgba(52,44,62,.5));
+    box-shadow: 0 2px 0 0 rgba(0,0,0,.1);
+    color: white;
+  }
+}

@@ -1,0 +1,5 @@
+class AddHitsCountToNotification < ActiveRecord::Migration[6.0]
+  def change
+    add_column :notifications, :hits_count, :integer, default: 0
+  end
+end

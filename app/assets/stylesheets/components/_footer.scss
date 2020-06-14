@@ -1,0 +1,49 @@
+footer {
+  line-height: 30px;
+  text-align: center;
+  color: #625471;
+  border-top: 1px solid #e2dee6;
+  padding: 28px 0;
+  margin-top: 20px;
+  background-color: #fbfbfc;
+
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+
+  .icon-attention-logo {
+    color: #625471;
+    font-size: 28px;
+    width: 32px;
+    margin: 0 auto;
+    display: block;
+
+    &:before {
+      content: '';
+      background-image: url('logo_200x200.png');
+      width: 52px;
+      height: 32px;
+      display: block;
+      background-size: cover;
+      background-position: -3px top;
+    }
+  }
+
+  .float-right a {
+    margin-left: 20px;
+  }
+  a {
+    color: #625471;
+  }
+}
+
+.icon, [class*=" icon-"], [class^=icon-] {
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

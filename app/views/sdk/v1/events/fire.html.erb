@@ -1,0 +1,3 @@
+<% content_for :title, @notification.title %>
+
+<%= render("sdk/v1/templates/#{params[:template]}", notification: @notification) %>

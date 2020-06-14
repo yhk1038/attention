@@ -1,0 +1,26 @@
+<%= render 'layouts/components/page/top_nav' %>
+
+<div class="container-fluid container-md mb-3">
+  <%= page_heading "Editing Notification... <span class='ml-2 text-muted'>#{@notification.humanized_id}</span>".html_safe do %>
+    <div class="flex-grow-1 text-right">
+      <%= link_to organization_notification_path(@organization, @notification, project_id: @project.id), class: 'btn btn-sm btn-styled' do %>
+        <i class="fas fa-arrow-left mr-1"></i>
+        Back
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="page-padding pt-2">
+    <button class="btn btn-<%= @notification.published? ? 'success' : 'secondary disabled' %> btn-sm font-weight-bold"><%= @notification.published? ? 'Published' : 'Draft' %></button>
+  </div>
+
+  <div class="page-padding">
+    <hr>
+  </div>
+</div>
+
+<div class="container-fluid container-md mb-3">
+  <div class="page-padding">
+    <%= render 'form', notification: @notification, url: organization_notification_path(@organization, @notification, project_id: @project.id) %>
+  </div>
+</div>

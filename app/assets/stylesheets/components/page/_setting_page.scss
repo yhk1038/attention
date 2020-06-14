@@ -1,0 +1,118 @@
+.setting_page-top_nav {
+  position: sticky;
+  top: 0;
+  z-index: 1024;
+}
+
+
+.setting-page-wrapper {
+  display: flex;
+  height: 100%;
+
+  & > div {
+    &.setting-page-subside {
+      flex-grow: 1;
+    }
+
+    &.setting-page-content {
+      width: calc(100% - 220px);
+    }
+  }
+
+  .setting-page-subside {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    .list-group-label {
+      margin-bottom: 0.25rem;
+      text-transform: uppercase;
+      font-size: 12px;
+      padding: 0 1.75rem;
+      font-weight: bold;
+    }
+
+    .list-group {
+      margin-bottom: 1rem;
+
+      .list-group-item {
+        padding: 0;
+        border: none;
+
+        a {
+          display: block;
+          padding: 0.25rem 1.75rem;
+          font-size: 14px;
+          text-transform: capitalize;
+          color: #9585a3;
+          transition: all .2s ease;
+          position: relative;
+
+          &:hover,
+          &.active {
+            color: #302839;
+          }
+
+          &.active:before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 14px;
+            background-color: #007fff;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+          }
+        }
+      }
+    }
+  }
+
+  .card {
+    margin-bottom: 1.5rem;
+
+    .card-header {
+      display: flex;
+      align-items: center;
+
+      h4, .h4 {
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 0;
+        flex-grow: 1;
+      }
+    }
+
+    & > .list-group {
+      & > .list-group-item {
+        & > .form-group {
+          margin-bottom: 0;
+          align-items: center;
+
+          span {
+            display: block;
+            margin-bottom: 5px;
+
+            .col-form-label {
+              padding-top: 0;
+              padding-bottom: 0;
+            }
+
+            & + small {
+              display: block;
+              line-height: 1.1;
+              white-space: pre-wrap;
+            }
+          }
+        }
+      }
+    }
+
+    .card-body {
+
+    }
+  }
+}

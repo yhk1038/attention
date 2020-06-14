@@ -1,0 +1,45 @@
+// Breakpoint viewport sizes and media queries.
+//
+// Breakpoints are defined as a map of (name: minimum width), order from small to large:
+//
+//    (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px)
+//
+// The map defined in the `$grid-breakpoints` global variable is used as the `$breakpoints` argument by default.
+
+.team-project-cards {
+  .card {
+    .card-header {
+      .project-name {
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 0;
+        flex-grow: 1;
+      }
+    }
+
+    .card-body {
+      .card-label {
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 5px;
+        line-height: 1;
+      }
+
+      .notification-stat-wrapper {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        margin-bottom: .5rem;
+
+        span:first-child {
+          font-size: 14px;
+          text-transform: capitalize;
+        }
+
+        span:last-child {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

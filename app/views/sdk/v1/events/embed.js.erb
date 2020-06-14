@@ -1,0 +1,36 @@
+function loadScript(id, src, callback) {
+  var existingScript = document.getElementById(id);
+
+  if (!existingScript) {
+    var insertPoint = document.getElementsByTagName('script')[0];
+    var scriptTag = document.createElement('script');
+    scriptTag.src = src;
+    scriptTag.onload = function() {
+      if (callback) callback();
+      if (!id) scriptTag.remove();
+    };
+    scriptTag.async = true;
+    insertPoint.parentNode.insertBefore(scriptTag, insertPoint);
+  }
+
+  if (existingScript && callback) callback();
+}
+
+
+/**
+ * Import & Initialize Attention module.
+ */
+loadScript('attention-sdk', '<%= asset_pack_url 'attention-sdk.js' %>', function() {
+  <% o = {} %>
+  <% o[:ids] = @notifications.map(&:humanized_id) %>
+  var inLiveNotificationIds = JSON.parse('<%= j o.to_json.html_safe %>').ids;
+
+  Attention.init('<%= @project.humanized_id %>', inLiveNotificationIds);
+  if (window.AT) {
+    var stack = window.AT.stack || [];
+    window.AT = window.Attention;
+    for(var i=0;i<stack.length;i++){stack[i]()}
+  }
+//  app.set_template('bootstrap4-modal');
+//  app.fire(inLiveNotificationIds);
+});

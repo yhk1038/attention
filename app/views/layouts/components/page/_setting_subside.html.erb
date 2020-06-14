@@ -1,0 +1,45 @@
+<div class="setting-page-subside bg-white border-right <%= 'd-none' unless @project.persisted? %>">
+  <% if @project.persisted? %>
+    <p class="list-group-label">project</p>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <%= active_link_to 'general settings', root_organization_project_setting_path(@organization, @project) %>
+      </li>
+
+      <li class="list-group-item">
+        <a href="#">alerts</a>
+      </li>
+
+      <li class="list-group-item">
+        <a href="#">environments</a>
+      </li>
+
+      <li class="list-group-item">
+        <a href="#">data forwarding</a>
+      </li>
+    </ul>
+
+    <p class="list-group-label">sdk setup</p>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <a href="#" class="">getting started</a>
+      </li>
+
+      <li class="list-group-item">
+        <a href="#">templates</a>
+      </li>
+
+      <li class="list-group-item">
+        <a href="#">client keys</a>
+      </li>
+
+      <li class="list-group-item">
+        <a href="#">authorization</a>
+      </li>
+
+      <li class="list-group-item">
+        <a href="#">permissions</a>
+      </li>
+    </ul>
+  <% end %>
+</div>

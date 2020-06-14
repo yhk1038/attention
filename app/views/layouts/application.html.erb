@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Attention</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <link rel="stylesheet" href="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.css">
+
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <script data-turbolinks-track="reload">
+    document.addEventListener('turbolinks:load', function() {
+      (function(r,a,i,l,s){
+        var o="http://localhost:3000/sdk/embed.js?id=";
+        var k='stack',y='ready';r[l]=r[l]||{};r[l][k]=[];r[l][y]=
+          function(f){r[l][k].push(f)};var f=a.getElementsByTagName(i)[0],
+          t=a.createElement(i),an=l!='AT'?'&sg='+l:'';t.async=false;
+        t.src=o+s+an;f.parentNode.insertBefore(t,f);
+      })(window,document,'script','AT','PJ-1');
+
+      AT.ready(function() {
+        AT.fire();
+      });
+    });
+
+    // (function(win, doc, scriptTag, moduleName, projectId) {
+    //   var url = 'http://localhost:3000/sdk/embed.js?id='+projectId;
+    //   var container = document.createElement('div');
+    //   var iFrame = document.createElement('iframe');
+    //   iFrame
+    // })(window, document, 'script', 'AT', 'PJ-4');
+  </script>
+</head>
+
+<body>
+
+<div class="d-flex" id="wrapper">
+  <%= render 'layouts/components/sidebar' %>
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <%= yield %>
+
+    <%= render 'layouts/components/footer' %>
+  </div>
+  <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+</body>
+</html>

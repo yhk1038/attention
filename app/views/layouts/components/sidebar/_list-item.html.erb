@@ -1,0 +1,22 @@
+<%#
+  @param :text
+  @param :path
+  @param :option
+  @param :block
+%>
+
+<%
+  active = option.delete(:active)
+  link_to_class = [option.delete(:class), "list-group-item list-group-item-action #{'active' if active}"].compact.join(' ')
+%>
+
+<%= link_to path, class: link_to_class, **option do %>
+  <div class="sidebar-item-wrapper">
+    <span class="sidebar-item-icon text-center">
+      <%= yield if block_given? %>
+    </span>
+    <span class="sidebar-item-label sidebar-collapse">
+      <div class="sidebar-text_overflow"><%= text %></div>
+    </span>
+  </div>
+<% end %>

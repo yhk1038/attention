@@ -1,0 +1,85 @@
+<%= form_with(model: notification, url: url, local: true) do |form| %>
+  <% if notification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(notification.errors.count, "error") %> prohibited this notification from being saved:</h2>
+
+      <ul>
+        <% notification.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-8 order-last order-md-first">
+      <div class="card">
+        <div class="card-header bg-white border-bottom-0 p-2">
+          <div class="field">
+            <%= form.text_field :title, class: 'form-control', placeholder: 'Title', required: true %>
+          </div>
+        </div>
+
+        <div class="card-body p-2">
+          <div class="field">
+            <%= form.text_area :content, class: 'form-control', placeholder: 'Leave a content', rows: 10, style: 'font-size: 14px', required: true, data: { provider: :summernote, lang: :'ko-KR' } %>
+          </div>
+        </div>
+
+        <div class="card-footer bg-white border-top-0 p-2">
+          <div class="actions text-right">
+            <%= form.submit class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 order-first order-md-last mb-3 mb-md-0">
+      <ul class="list-group list-group-flush" style="font-size: 12px;">
+        <li class="list-group-item bg-transparent px-0">
+          <%= form.hidden_field :project_id %>
+          <i class="far fa-folder-open"></i>
+          <%= form.label :project_id, 'Project', class: 'font-weight-bold m-0' %>
+          <input type="text" class="form-control-plaintext" style="font-size: 12px;" disabled value="<%= form.object.project.name %>">
+        </li>
+
+        <li class="list-group-item bg-transparent px-0">
+          <i class="far fa-clock"></i>
+          <label class="font-weight-bold m-0">Live Schedule</label>
+          <br>
+
+
+          <%= form.label :live_start_at, 'start time', class: 'm-0 text-capitalize' %>
+          <div class="input-group mb-1">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+            </div>
+            <% if !form.object.will_live? %>
+              <p class="m-0 form-control" style="font-size: 12px; cursor: not-allowed; background: #ededed;"><%= form.object.live_start_at.strftime('%Y-%m-%d %H:%m') %></p>
+              <%= form.text_field :live_start_at, class: 'form-control', style: 'display: none; font-size: 12px;', value: form.object.live_stop_at.strftime('%Y-%m-%d %H:%m'), data: { provider: 'datetimepicker', min: @minimum_start_at.strftime('%Y/%m/%d %H:%m') } %>
+            <% else %>
+              <%= form.text_field :live_start_at, class: 'form-control', style: 'font-size: 12px;', value: form.object.live_stop_at.strftime('%Y-%m-%d %H:%m'), data: { provider: 'datetimepicker', min: @minimum_start_at.strftime('%Y/%m/%d %H:%m') } %>
+            <% end %>
+          </div>
+
+          <%= form.label :live_stop_at, 'end time', class: 'm-0 text-capitalize' %>
+          <div class="input-group mb-1">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+            </div>
+            <% if form.object.did_live? %>
+              <p class="m-0 form-control" style="font-size: 12px; cursor: not-allowed; background: #ededed;"><%= form.object.live_start_at.strftime('%Y-%m-%d %H:%m') %></p>
+              <%= form.text_field :live_stop_at, class: 'form-control', style: 'display: none; font-size: 12px;', value: form.object.live_stop_at.strftime('%Y-%m-%d %H:%m'), data: { provider: 'datetimepicker', min: @minimum_start_at.strftime('%Y/%m/%d %H:%m') } %>
+            <% else %>
+              <%= form.text_field :live_stop_at, class: 'form-control', style: 'font-size: 12px;', value: form.object.live_stop_at.strftime('%Y-%m-%d %H:%m'), data: { provider: 'datetimepicker', min: @minimum_start_at.strftime('%Y/%m/%d %H:%m') } %>
+            <% end %>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+<!--<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">-->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">

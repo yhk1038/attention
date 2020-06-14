@@ -1,0 +1,53 @@
+@mixin random-bgr($attr){
+  #{$attr}: rgb(random(255), random(255), random(255));
+}
+
+$alphabet: (a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z);
+
+.avatar-character {
+  text-transform: uppercase;
+  display: inline-block;
+  position: relative;
+  width: 26px;
+  height: 26px;
+  line-height: 22px;
+  text-align: center;
+  border-radius: 13px;
+  border: 2px solid #fff;
+  font-size: 11px;
+  cursor: pointer;
+  //color: #fff;
+  //font-weight: 500;
+
+  background-color: #dfe1e6;
+  color: #000;
+  font-weight: bold;
+
+
+  //@each $char in $alphabet {
+  //  &.char-#{$char} {
+  //    @include random-bgr(background-color);
+  //  }
+  //}
+
+  + .avatar-character {
+    margin-left: -13px;
+  }
+
+  &.border-0 {
+    font-size: 13px;
+    line-height: 24px;
+  }
+
+  &.avatar-character-lg {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    line-height: 26px;
+    font-size: 12px;
+
+    &.border-0 {
+      line-height: 30px;
+    }
+  }
+}

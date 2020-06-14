@@ -1,0 +1,88 @@
+<%= render 'layouts/components/page/top_nav' %>
+
+<div class="container-fluid container-md mb-3">
+  <%= page_heading "#{@notification.title} <span class='ml-2 text-muted'>#{@notification.humanized_id}</span>".html_safe do %>
+    <div class="flex-grow-1 text-right">
+      <%= link_to edit_organization_notification_path(@organization, @notification, project_id: @project.id), class: 'btn btn-sm btn-styled' do %>
+        <i class="fas fa-pen mr-1"></i>
+        Edit
+      <% end %>
+
+      <%= link_to organization_notifications_path(@organization, project_id: @project.id), class: 'btn btn-sm btn-styled' do %>
+        <i class="fas fa-list mr-1"></i>
+        List
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="page-padding pt-2">
+    <button class="btn btn-<%= @notification.published? ? 'success' : 'secondary disabled' %> btn-sm font-weight-bold"><%= @notification.published? ? 'Published' : 'Draft' %></button>
+  </div>
+
+  <div class="page-padding">
+    <hr>
+  </div>
+</div>
+
+<div class="container-fluid container-md mb-3">
+  <div class="page-padding">
+      <div class="row">
+        <div class="col-md-8 order-last order-md-first">
+          <div class="card">
+            <div class="card-header p-2">
+              <div class="m-0 text-black-50" style="font-size: 12px">Last updated on <b><%= l @notification.updated_at, format: :long %></b></div>
+            </div>
+
+            <div class="card-body p-2">
+              <div class="field">
+                <pre class="border-0 bg-transparent" style="font-family: inherit;min-height: 300px;"><%= raw @notification.content %></pre>
+              </div>
+            </div>
+
+            <div class="card-footer bg-white border-top-0 p-2">
+              <div class="actions text-right">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 order-first order-md-last mb-3 mb-md-0">
+          <ul class="list-group list-group-flush" style="font-size: 12px;">
+            <li class="list-group-item bg-transparent px-0">
+              <i class="far fa-folder-open"></i>
+              <label class="font-weight-bold m-0 text-capitalize">Project</label>
+              <input type="text" class="form-control-plaintext" style="font-size: 12px;" disabled value="<%= @notification.project.name %>">
+            </li>
+
+            <li class="list-group-item bg-transparent px-0">
+              <i class="far fa-clock"></i>
+              <label class="font-weight-bold m-0 text-capitalize">Live Schedule</label>
+              <br>
+
+
+              <label class="m-0 text-capitalize">start time</label>
+              <div class="input-group mb-1">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                </div>
+                <p class="m-0 form-control" style="font-size: 12px; cursor: not-allowed; background: #ededed;"><%= @notification.live_start_at.strftime('%Y-%m-%d %H:%m') %></p>
+              </div>
+
+              <label class="m-0 text-capitalize">end time</label>
+              <div class="input-group mb-1">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                </div>
+                <p class="m-0 form-control" style="font-size: 12px; cursor: not-allowed; background: #ededed;"><%= @notification.live_start_at.strftime('%Y-%m-%d %H:%m') %></p>
+              </div>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    <!--<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">-->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+  </div>
+</div>
